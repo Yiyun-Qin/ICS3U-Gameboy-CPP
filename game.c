@@ -23,7 +23,7 @@ int main() {
         switch (joypad()) {;
             case J_LEFT:
             // index of sprite to access, x, y
-                    scroll_sprite(0, -10, 0);
+                scroll_sprite(0, -10, 0);
             break;
             case J_RIGHT:
                 scroll_sprite(0, 10, 0);
