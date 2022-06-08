@@ -20,11 +20,13 @@ int main() {
     const screenY = 144;
     const spriteX = 8;
     const spriteY = 8;
-    
+
     // background
-    set_bkg_data(0, 7, backgroundtiles)
+    set_bkg_data(0, 7, backgroundtiles);
     // start at 0 in 0, x, y, go to backgroundmap to know how to use
-    set_bkg_tile(0, 0, 40, 18, backgroundmap)
+    set_bkg_tiles(0, 0, 40, 18, backgroundmap);
+    SHOW_BKG;
+    DISPLAY_ON;
     // start from nth tiles, to load how many elements, file name
     set_sprite_data(0, 1, TileData);
     // number of sprite, the nth tile(smile)
@@ -34,6 +36,11 @@ int main() {
     SHOW_SPRITES;
 
     while (1) {
+        // scroll background
+        scroll_bkg(1, 0);
+        delay(100);
+
+        // sprite moving
         switch (joypad()) {;
             case J_LEFT:
             // index of sprite to access, x, y
