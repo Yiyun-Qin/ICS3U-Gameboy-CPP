@@ -21,7 +21,7 @@ void main() {
     const screenX = 160;
     const screenY = 144;
     const spriteX = 8;
-    const spriteY = 8
+    const spriteY = 8;
 
     // font
     font_t min_font;
@@ -32,9 +32,9 @@ void main() {
     font_set(min_font);
 
     // fonts, width and height
-    set_win_tiles(0, 0, 5, 1, windowmap)
+    set_win_tiles(0, 0, 5, 1, windowmap);
     // window layer is above other layers, so it overlap other layers
-    move_win(7, 120)
+    move_win(7, 120);
 
     // background
     // start at 37 to prevent overlap with font
@@ -62,7 +62,7 @@ void main() {
         delay(100);
 
         // sprite moving
-        switch (joypad()) {;
+        switch (joypad()) {
             case J_LEFT:
             // index of sprite to access, x, y
                 if (x > spriteX) {
