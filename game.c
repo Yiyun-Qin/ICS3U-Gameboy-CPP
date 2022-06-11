@@ -52,12 +52,12 @@ void main() {
 
     // sound
     // these registers need to be in this specific order
-    NR52_REG = 0x80;  // is 1000 0000 in binary and tells
-                      // Gameboy to open the whole sound system
-    NR50_REG = 0x77;  // set the volume for both left and right
-                      // channels to the max 0x77
-    NR51_REG = 0xFF;  // is 1111 1111 in binary and select which
-                      // channels we want to use
+    NR52_REG = 0x80;
+    // is 1000 0000 in binary and tells Gameboy to open the whole sound system
+    NR50_REG = 0x77;
+    // set the volume for both left and right channels to the max 0x77
+    NR51_REG = 0xFF;
+    // is 1111 1111 in binary and select which channels we want to use
     // now they are all open
 
     // show the map
@@ -72,9 +72,7 @@ void main() {
         delay(100);
 
         // sound
-        UBYTE jotpad_state = joypad();
-
-        if (jotpad_state) {
+        if (joypad()) {
             // channel 1 register 0, frequency sweep settings
             // sweep: increase or decrease in frequency
             // 7    unused
@@ -86,13 +84,47 @@ void main() {
             // shift amount per step 110(6 decimals)
             NR10_REG = 0x51;
 
+            // channel 1 register 1, wave parrern duty and sound length
+            // channels 1, 2 and 4
+            // 7-6 wave pattern duty cycle 0-3(12.5%, 25%, 50%, 75%),
+            // duty cycle is how long a quadrangular is "on"(top) and "off"
+            // 50% means both equal
+            // 5-0 sound length, higher the number shorter the sound
+            // 0x40 = 0100 0000, duty cycle 1(25%), wave length 0
             NR11_REG = 0x40;
 
+            // channel 1 register 2, volume envelope
+            // (makes the volume get lounder or quieter each "tick")
+            // channels 1, 2 and 4
+            // 7-4 initial channel volume
+            // 3   volume sweep direction(0 is down, 1 is up)
+            // 2-0 length of each step in sweep(if is 0, sweeping is off)
+            // (how quickly the sound fades)
+            // Note: each step is n/64 seconds long, where n is 1-7
+            // 0x73 = 0111 0011, volume 7, sweep down, sweep length 3
             NR12_REG = 0x73;
 
+            // channel 1 register 3, frequency LSbs(least significant bits)
+            // and noise options
+            // for channels 1, 2 and 3
+            // 7-0 8 least significant bits of frequency
+            // (3 most significant bits will be set in register 4)
             NR13_REG = 0x00;
 
+            // channel 1 register 4, Playback and frequency MSbs
+            // channels 1, 2, 3 and 4
+            // 7   initialize (trigger channel start, AKA channel INIT)
+            // (write only)
+            // 6   consecutive select/length counter enable (read/write)
+            // regardless of the lenght of data in register 1, when it is "0",
+            // sound can be produced until the nest sound is played
+            // 5-3 unused
+            // 2-0 3 most significant bits of frequency
+            // 0xC3 = 1100 0011, initialize, no consecutive,
+            // frequency = LSb + MSb = 011 0000 0000 = 0x300
             NR14_REG = 0xC3;
+
+            delay(100);
         }
 
         // sprite moving
