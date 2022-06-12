@@ -78,7 +78,7 @@ void main() {
             NR41_REG = 0x1F;
 
             // volume envelope
-            // (makes the volume get lounder or quieter each "tick")
+            // (makes the volume get louder or quieter each "tick")
             // 7-4 initial channel volume (0 - no sound)
             // 3   volume sweep direction(0 is down, 1 is up)
             // 2-0 length of each step in sweep(if is 0, sweeping is off)
@@ -103,7 +103,7 @@ void main() {
             // (write only)
             // when bit 7 is 1, it means restarting the sound
             // 6   consecutive select/length counter enable (read/write)
-            // regardless of the lenght of data in register 1, when it is "0",
+            // regardless of the length of data in register 1, when it is "0",
             // sound can be produced until the next sound is played
             // *The sound will last forever or stop when NR41 is over
             // 5-0 unused
