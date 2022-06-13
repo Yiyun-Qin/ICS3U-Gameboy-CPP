@@ -111,6 +111,8 @@ void main() {
         scroll_bkg(1, 0);
 
         // sprite moving
+        // If I move this joypad() & J_A to the bottom of the three if statement
+        // I can't jump when I press A
         if ((joypad() & J_A) || jumping == 1) {
             jump();
         }
