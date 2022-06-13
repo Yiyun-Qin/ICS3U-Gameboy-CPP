@@ -118,6 +118,10 @@ void main() {
                 if (playerLocation[0] > spriteX) {
                     playerLocation[0] = playerLocation[0] - 2;
                     move_sprite(0, playerLocation[0], playerLocation[1]);
+                    // when I add this jumping code,
+                    // I can fly when pressing left
+                    // If I don't add this code, I jump when I press left
+                    jumping = 0
                 }
             break;
             case J_RIGHT:
