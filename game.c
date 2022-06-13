@@ -89,7 +89,7 @@ void main() {
     set_sprite_data(0, 8, bloke);
     // number of sprite, the nth tile(smile)
     set_sprite_tile(0, 0);
-    
+
     // x
     playerLocation[0] = 10;
     // y
@@ -109,7 +109,6 @@ void main() {
     while (1) {
         // scroll background
         scroll_bkg(1, 0);
-        delay(100);
 
         // sprite moving
         if ((joypad() & J_A) || jumping == 1) {
