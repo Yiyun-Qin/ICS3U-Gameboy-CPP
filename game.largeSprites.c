@@ -26,6 +26,14 @@ void performantDelay(UINT8 loopCounter) {
 }
 
 
+UBYTE checkCollisions(struct GameCharacter* one, struct GameCharacter* two) {
+     return (one->x >= two->x && one->x <= two->x + two->width) &&
+     (one->y >= two->y && one->y <= two->y + two->height) ||
+     (two->x >= one->x && two->x <= one->x + one->width) &&
+     (two->y >= one->y && two->y <= one->y + one->height);
+}
+
+
 void MoveGameCharacter(struct GameCharacter* character, UINT8 x, UINT8 y) {
     // because using a pointer*, we need to use -> instead of .
     // move spriteID[0] into x and y
@@ -57,8 +65,8 @@ void SetupShip() {
 
 
 void SetupBug() {
-    bug.x = 80;
-    bug.y = 130;
+    bug.x = 30;
+    bug.y = 0;
     bug.width = 16;
     bug.height = 16;
 
@@ -99,7 +107,9 @@ void main() {
     SHOW_SPRITES;
     DISPLAY_ON;
 
-    while (1) {
+    // a collision will return true(1), no collision will return false(0)
+    // ! make false becomes true, true becomes false
+    while (!checkCollisions(&ship, &bug)) {
         // scroll background
         // scroll_bkg(1, 0);
         // delay(100);
@@ -130,4 +140,6 @@ void main() {
 
         performantDelay(5);
     }
+
+    printf("\n \n \n \n \n \n \n === GAME  OVER ===");
 }
