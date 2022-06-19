@@ -123,19 +123,19 @@ void main() {
                 }
             break;
             case J_RIGHT:
-                if (x < screenX - spriteX) {
+                if (x < screenX) {
                     scroll_sprite(0, 10, 0);
                     x = x + 10;
                 }
             break;
             case J_UP:
-                if (y > 24) {
+                if (y > 16) {
                     scroll_sprite(0, 0, -10);
                     y = y - 10;
                 }
             break;
             case J_DOWN:
-                if (y < screenY) {
+                if (y < screenY + spriteY) {
                     scroll_sprite(0, 0, 10);
                     y = y + 10;
                 }
